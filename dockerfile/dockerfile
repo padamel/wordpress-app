@@ -1,0 +1,28 @@
+FROM ubuntu: 22.04
+
+LABEL maintainer novist-image-builder
+
+# run system update
+
+RUN apt-get update
+
+# check the memory usage
+
+RUN  cat /proc/meminfo | awk '{print $1 " " $2/1048576 " GB"}' | column -t
+
+# install apache2 web server
+
+RUN apt-get install apache2 -y
+
+# update port number in the port.conf file that the apache2 listen to
+
+RUN sed -i '/^Listen 80/a Listen 81' /etc/apache2/ports.conf
+
+# expose container on port 81
+
+EXPOSE 81
+
+# start apache2 service
+
+CMD ["apache2ctl", "-D", "FOREGROUND"] 
+ 

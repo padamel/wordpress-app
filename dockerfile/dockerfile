@@ -1,4 +1,4 @@
-FROM ubuntu: 22.04
+FROM ubuntu:22.04
 
 LABEL maintainer novist-image-builder
 
@@ -8,7 +8,7 @@ RUN apt-get update
 
 # check the memory usage
 
-RUN  cat /proc/meminfo | awk '{print $1 " " $2/1048576 " GB"}' | column -t
+RUN cat /proc/meminfo | awk '{print $1 " " $2/1048576 " GB"}'
 
 # install apache2 web server
 
